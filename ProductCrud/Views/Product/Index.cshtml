@@ -1,0 +1,44 @@
+﻿@model IEnumerable<DAL.Models.ProductModel>
+
+@{
+    ViewData["Title"] = "Product";
+    Layout = "_Layout";
+}
+
+
+
+
+
+<div class="container">
+
+    <div class="d-flex justify-content-center"><h1>Product Details</h1></div>
+    <div class="d-flex justify-content-start"><a class="btn btn-primary mb-4" asp-action="Create">Add New Product</a></div>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card" style="width: 18rem;">
+                    @*<img src="..." class="card-img-top" alt="...">*@
+                    <div class="imgContainer">
+                        @if (item.ImagePath != null)
+                        {
+                            <img class="bd-placeholder-img card-img-top imgelem" src="@item.ImagePath" style="width:100%;height:180px;" height="180" role="img" focusable="false" />
+                            <a class="btn" asp-action="Delete" asp-controller="Product" asp-route-Id="@item.Id" onclick="return confirm('Are you sure you want to delete?');"> <i class=" fa fa-times" aria-hidden="true"></i></a>
+                        }
+                        else
+                        {
+                            <svg class="bd-placeholder-img card-img-top imgelem" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+                            <a class="btn" asp-action="Delete" asp-controller="Product" asp-route-Id="@item.Id" onclick="return confirm('Are you sure you want to delete?');"> <i class=" fa fa-times" aria-hidden="true"></i></a>
+                        }
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text float-start">@item.ProductName</p>
+                        <p class="card-text float-end"><a asp-action="Update" asp-controller="Product" asp-route-Id="@item.Id"><i class="fa fa-edit"></i></a></p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
